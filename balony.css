@@ -1,0 +1,39 @@
+#balloon-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 999;
+}
+
+.balloon {
+    position: absolute;
+    bottom: -120px;
+    width: 50px;
+    height: 65px;
+    background: radial-gradient(circle at 30% 30%, #fff, red);
+    border-radius: 50% 50% 45% 45%;
+    animation: floatUp linear forwards;
+}
+
+.balloon::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    width: 2px;
+    height: 25px;
+    background: #555;
+    transform: translateX(-50%);
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-120vh);
+        opacity: 0.9;
+    }
+}

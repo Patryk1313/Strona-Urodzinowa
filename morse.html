@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sto lat Madzia!</title>
+  <link rel="stylesheet" href="morse.css">
+</head>
+<body>
+
+  <!-- Sekcja zasad -->
+  <section id="rules">
+    <h2 style="text-align:center;">Witaj w pierwszej grze!</h2>
+    <p>Twoim zadaniem jest rozszyfrować lampkę – każda litera lub cyfra w Morse’a to kolejny znak słowa. Obserwuj błyski i próbuj odgadnąć, co się pojawia, korzystając z tabeli alfabetu Morse’a.</p>
+    <p>Gra <strong>nie</strong> kończy się, gdy odgadniesz całe słowo lub ciąg liter/cyfr.</p>
+    <p>Jeżeli wiesz jaka jest pierwsza cyfra PIN'u, sprawdź ją (przycisk na dole).</p>
+    <p>Ale uwaga! Jeśli pomylisz się <strong>3 razy</strong>, jeden prezent przepada!</p>
+    <p style="text-align:center; font-style:italic; margin-top:15px;">Gotowy? Niech lampka zacznie mrugać i odkrywa Twoje prezenty w rytmie Morse’a!</p>
+    <button id="rulesBtn"><span class="button_top">Zaczynajmy!</span></button>
+  </section>
+
+  <!-- Lampka Morse'a -->
+  <div id="lamp"></div>
+
+  <!-- Kontener z alfabetem Morse'a -->
+  <div class="container">
+    <!-- Lewa kolumna -->
+    <table>
+      <tr><th>Litera</th><th>Morse</th></tr>
+      <tr><td>A</td><td class="symbol">.-</td></tr>
+      <tr><td>B</td><td class="symbol">-...</td></tr>
+      <tr><td>C</td><td class="symbol">-.-.</td></tr>
+      <tr><td>D</td><td class="symbol">-..</td></tr>
+      <tr><td>E</td><td class="symbol">.</td></tr>
+      <tr><td>F</td><td class="symbol">..-.</td></tr>
+      <tr><td>G</td><td class="symbol">--.</td></tr>
+      <tr><td>H</td><td class="symbol">....</td></tr>
+      <tr><td>I</td><td class="symbol">..</td></tr>
+      <tr><td>J</td><td class="symbol">.---</td></tr>
+      <tr><td>K</td><td class="symbol">-.-</td></tr>
+      <tr><td>L</td><td class="symbol">.-..</td></tr>
+      <tr><td>M</td><td class="symbol">--</td></tr>
+    </table>
+
+    <!-- Prawa kolumna -->
+    <table>
+      <tr><th>Litera</th><th>Morse</th></tr>
+      <tr><td>N</td><td class="symbol">-.</td></tr>
+      <tr><td>O</td><td class="symbol">---</td></tr>
+      <tr><td>P</td><td class="symbol">.--.</td></tr>
+      <tr><td>Q</td><td class="symbol">--.-</td></tr>
+      <tr><td>R</td><td class="symbol">.-.</td></tr>
+      <tr><td>S</td><td class="symbol">...</td></tr>
+      <tr><td>T</td><td class="symbol">-</td></tr>
+      <tr><td>U</td><td class="symbol">..-</td></tr>
+      <tr><td>V</td><td class="symbol">...-</td></tr>
+      <tr><td>W</td><td class="symbol">.--</td></tr>
+      <tr><td>X</td><td class="symbol">-..-</td></tr>
+      <tr><td>Y</td><td class="symbol">-.--</td></tr>
+      <tr><td>Z</td><td class="symbol">--..</td></tr>
+    </table>
+  </div>
+
+  <!-- Input do sprawdzania liczby -->
+  <div style="text-align:center; margin-top:20px;">
+    <input type="text" class="input" placeholder="Type here...">
+    <br><br>
+    <button id="checkNumber"><span class="button_top">Sprawdź</span></button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

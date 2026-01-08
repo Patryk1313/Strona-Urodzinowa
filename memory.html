@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Game</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #f0f0f0;
+  }
+
+  h1 { margin-bottom: 10px; text-align: center; }
+
+  #timer, #score { font-size: 20px; margin-bottom: 10px; color: #333; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    grid-gap: 15px;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .card {
+    width: 100%;
+    padding-top: 100%;
+    background: #444;
+    cursor: pointer;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+
+  .card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    object-fit: cover;
+  }
+
+  .card.flipped img { display: block; }
+
+  #result { margin-top: 20px; font-size: 24px; text-align: center; }
+
+  @media (min-width: 600px) { .grid { grid-gap: 20px; } }
+</style>
+</head>
+<body>
+
+<h1>Memory Game</h1>
+<div id="timer">Czas: 25s</div>
+<div id="score">Punkty: 0</div>
+<div class="grid" id="grid"></div>
+<div id="result"></div>
+
+<script>
+const images = [
+  {src: 'memoryImg/Madzia1.jpg', id: 1},
+  {src: 'memoryImg/Madzia2.png', id: 2},
+  {src: 'memoryImg/Madzia3.png', id: 3},
+  {src: 'memoryImg/Madzia4.png', id: 4},
+  {src: 'memoryImg/Madzia5.png', id: 5},
+  {src: 'memoryImg/Madzia6.png', id: 6},
+  {src: 'memoryImg/Madzia7.png', id: 7},
+  {src: 'memoryImg/Madzia8.png', id: 8},
+  {src: 'memoryImg/Madzia9.png', id: 9},
+  {src: 'memoryImg/Madzia10.png', id: 10}
+];
+
+const cardImages = [...images, ...images].sort(() => 0.5 - Math.random());
+
+let grid = document.getElementById('grid');
+let score = 0;
+let cardsMatched = 0;
+let gameOver = false;
+let timeLeft = 225;
+let lockBoard = false; // blokada podczas sprawdzania par
+let timerDisplay = document.getElementById('timer');
+let scoreDisplay = document.getElementById('score');
+
+// Tworzenie planszy
+cardImages.forEach((imgObj, index) => {
+  const card = document.createElement('div');
+  card.classList.add('card');
+  card.setAttribute('data-id', index);
+
+  const img = document.createElement('img');
+  img.src = imgObj.src;
+  card.appendChild(img);
+
+  card.addEventListener('click', flipCard);
+  grid.appendChild(card);
+});
+
+let firstCard, secondCard;
+
+function flipCard() {
+  if (gameOver || lockBoard) return;
+
+  const cardId = Number(this.getAttribute('data-id'));
+  if (this === firstCard || this.classList.contains('flipped')) return;
+
+  this.classList.add('flipped');
+
+  if (!firstCard) {
+    firstCard = this;
+    return;
+  }
+
+  secondCard = this;
+  lockBoard = true;
+
+  // Sprawdzenie dopasowania po 500ms
+  setTimeout(() => {
+    const firstObj = cardImages[Number(firstCard.getAttribute('data-id'))];
+    const secondObj = cardImages[Number(secondCard.getAttribute('data-id'))];
+
+    if (firstObj.id === secondObj.id) {
+      cardsMatched += 2;
+      score += 10;
+      scoreDisplay.textContent = `Punkty: ${score}`;
+    } else {
+      firstCard.classList.remove('flipped');
+      secondCard.classList.remove('flipped');
+    }
+
+    firstCard = null;
+    secondCard = null;
+    lockBoard = false;
+
+    if (cardsMatched === cardImages.length) endGame(true);
+  }, 500);
+}
+
+// Koniec gry
+function endGame(won) {
+  gameOver = true;
+  if (won) {
+    document.getElementById('result').textContent = `Kolejna cyfra Twojego pinu to 0`;
+    document.getElementById('result').style.color = 'green';
+  } else {
+    document.getElementById('result').textContent = `Czas minął! Punkty: ${score}`;
+    document.getElementById('result').style.color = 'red';
+    document.querySelectorAll('.card').forEach(card => card.classList.add('flipped'));
+  }
+}
+
+// Timer 25 sekund
+const countdown = setInterval(() => {
+  if (gameOver) {
+    clearInterval(countdown);
+    return;
+  }
+  timeLeft--;
+  timerDisplay.textContent = `Czas: ${timeLeft}s`;
+  if (timeLeft <= 0) {
+    clearInterval(countdown);
+    endGame(false);
+  }
+}, 1000);
+</script>
+
+</body>
+</html>
