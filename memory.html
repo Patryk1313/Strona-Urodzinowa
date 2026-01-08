@@ -145,8 +145,7 @@ function flipCard() {
 function endGame(won) {
   gameOver = true;
   if (won) {
-    document.getElementById('result').textContent = `Kolejna cyfra Twojego pinu to 0`;
-    document.getElementById('result').style.color = 'green';
+    alert("Kolejna cyfra Twojego pinu to 0")
   } else {
     document.getElementById('result').textContent = `Czas minął! Punkty: ${score}`;
     document.getElementById('result').style.color = 'red';
