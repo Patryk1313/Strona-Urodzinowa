@@ -45,8 +45,8 @@ const morse = [
 ];
 const dot = 250;
 const dash = 750;
-const intraLetterPause = 250;
-const interLetterPause = 750;
+const intraLetterPause = 450;
+const interLetterPause = 950;
 const wordPause = 3000;
 
 function blinkSymbol(symbol){
