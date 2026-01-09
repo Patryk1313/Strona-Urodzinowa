@@ -9,9 +9,8 @@
 
     body {
       background-image: url(morse.jpg);
-          background-size: cover;
-    background-position: start;
-    background-repeat: no-repeat;
+      background-size: cover;
+      background-repeat: no-repeat;
       text-align: center;
       padding: 20px;
     }
