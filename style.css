@@ -11,7 +11,7 @@
 body {
     color: #000000;
     line-height: 1.6;
-    background-image: url('/bg/Madzia.jpg');
+    background-image: url('Madzia.jpg');
     background-size: cover;
     background-position: start;
     background-repeat: no-repeat;
