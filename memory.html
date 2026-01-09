@@ -146,6 +146,7 @@ function endGame(won) {
   gameOver = true;
   if (won) {
     alert("Kolejna cyfra Twojego pinu to 0")
+    window.location.href = "theend.html";
   } else {
     document.getElementById('result').textContent = `Czas minął! Punkty: ${score}`;
     document.getElementById('result').style.color = 'red';
